@@ -72,35 +72,22 @@ def tic_tac_toe(board):
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
 
-    for rows in board:
-        if len(set(rows)) == 1:
-            return (rows[0])
- 
-    transformed = []
-    for x in range(len(board[0])):
-        temp = []
-    
-    for y in range(len(board)):
-            temp.append(board[y][x])
-        transformed.append(temp)
- 
-    for columns in transformed:
-        if len(set(columns)) == 1:
-            return (columns[0])
- 
-    up_diagonal = []
-    for x in range(len(board)):
-        up_diagonal.append(board[x][len(board)-x-1])
-    if len(set(up_diagonal)) == 1:
-        return board[0][len(board)-1]
+    for row in board:
+        if len(set(row)) == 1:
+            return row[0]
 
-    down_diagonal = []
-    for x in range(len(board)):
-        down_diagonal.append(board[x][x])
-    if len(set(down_diagonal)) == 1:
+    for row in zip(*board):    
+        if len(set(row)) == 1:
+            return row[0]
+        
+    if len(set([board[i][i] for i in range(len(board))])) == 1:
         return board[0][0]
-       
-    return("NO WINNER")
+
+    elif len(set([board[2-i][i] for i in range(len(board))])) == 1:
+            return board[2-0][0]
+  
+    else:
+            return "NO WINNER"
 
 def eta(first_stop, second_stop, route_map):
     '''ETA. 
@@ -129,22 +116,28 @@ def eta(first_stop, second_stop, route_map):
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    circle_route = []
-    route_time = []
+    route = []
+    time_route = []
     time_sum = 0
     running = False
  
     if first_stop == second_stop:
         return time_sum
+    
     for key, value in route_map.items():
-        circle_route.append(key)
-        route_time.append(value['travel_time_mins'])
-    routes = list(zip(circle_route, route_time))
+        route.append(key)
+        time_route.append(value['travel_time_mins'])
+        routes = list(zip(route, time_route))
+    
     for route in routes:
+        
         if first_stop == route[0][0]:
             running = True
+            
         if running:
             time_sum += route[1]
+            
         if second_stop == route[0][1]:
             break
+            
     return time_sum
