@@ -33,15 +33,19 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    to_member_following_list = social_graph[to_member]["following"]
-    from_member_following_list=social_graph[from_member]["following"]
+   
+    to_following_list = social_graph[to_member]["following"]
+    from_following_list = social_graph[from_member]["following"]
  
-    if to_member in from_member_following_list and from_member in to_member_following_list:
+    if to_member in from_following_list and from_member in to_following_list:
         return "friends"
-    elif to_member in from_member_following_list:
-        return "follower"
-    elif from_member in to_member_following_list:
+    
+    elif from_member in to_following_list:
         return "followed by"
+    
+    elif to_member in from_following_list:
+        return "follower"
+   
     else:
         return "no relationship"
 
@@ -67,6 +71,7 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+
     for rows in board:
         if len(set(rows)) == 1:
             return (rows[0])
@@ -74,7 +79,8 @@ def tic_tac_toe(board):
     transformed = []
     for x in range(len(board[0])):
         temp = []
-        for y in range(len(board)):
+    
+    for y in range(len(board)):
             temp.append(board[y][x])
         transformed.append(temp)
  
@@ -82,17 +88,17 @@ def tic_tac_toe(board):
         if len(set(columns)) == 1:
             return (columns[0])
  
-    down_diagonal = []
-    for x in range(len(board)):
-        down_diagonal.append(board[x][x])
-    if len(set(down_diagonal)) == 1:
-        return board[0][0]
- 
     up_diagonal = []
     for x in range(len(board)):
         up_diagonal.append(board[x][len(board)-x-1])
     if len(set(up_diagonal)) == 1:
         return board[0][len(board)-1]
+
+    down_diagonal = []
+    for x in range(len(board)):
+        down_diagonal.append(board[x][x])
+    if len(set(down_diagonal)) == 1:
+        return board[0][0]
        
     return("NO WINNER")
 
@@ -122,6 +128,7 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+    
     circle_route = []
     route_time = []
     time_sum = 0
