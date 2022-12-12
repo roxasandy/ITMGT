@@ -31,8 +31,18 @@ def shift_letter(letter, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
-
+    
+    shift_letter = (ord(letter) + int(shift) - 65) % 26 + 65 
+    
+    if ord(letter) == 32:
+        return(" ");
+    
+    elif shift_letter >= 65 and shift_letter <= 90:
+        return chr(shift_letter);
+    
+    else:
+        return "error"
+    
 def caesar_cipher(message, shift):
     '''Caesar Cipher. 
     6 points.
@@ -51,7 +61,20 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+   
+    answer = ""
+    
+    for char in message:
+        if ord(char) == 32:
+            answer = answer + char
+        
+        elif ord(char) >= 65 and ord(char) <= 90:
+            answer += chr(((ord(char) + int(shift) - 65) %26 + 65))
+             
+        else:
+             answer = "error"
+                
+    return answer
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter. 
@@ -78,7 +101,16 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    shift_by_letter = (((ord(letter) - 65) + (ord(letter_shift) - 65)) %26) + 65
+        
+    if ord(letter) == 32:
+         return(" ")
+        
+    elif shift_by_letter >= 65 and shift_by_letter <= 90:
+         return chr(shift_by_letter)
+    else:
+         return "error"
 
 def vigenere_cipher(message, key):
     '''Vigenere Cipher. 
@@ -107,4 +139,16 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    cipher = len(key)
+    
+    answer = ""
+    
+    for i in range (len(message)):
+        if message[i] == " ": 
+            answer += " "
+            
+        else:
+            answer += chr( ( ( ord(message[i]) + ord(key[i % cipher])) % 26  ) + 65 )
+            
+    return answer
